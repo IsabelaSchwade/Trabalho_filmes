@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Filmes</title>
     <link rel="stylesheet" href="<?= base_url('css/1.css') ?>">
-   
 </head>
 <body>
 
@@ -25,6 +24,11 @@
             </div>
         <?php endif; ?>
     </div>
-</div>
+
+    <div style="margin-bottom:20px;">
+       <a href="<?= base_url('filme/form') ?>" class="btn btn-success">Nova Produção</a>
+
+
+    </div>
 </body>
 </html>
