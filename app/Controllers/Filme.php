@@ -14,12 +14,14 @@ class Filme extends BaseController
         $this->filmeModel = new FilmeModel();
     }
 
-    public function index($status = null)
+    public function index()
     {
         $filmes = $this->filmeModel->findAll();
 
         return view('filmes', [
-            'filmes' => $filmes
+            'filmes' => $filmes,
+            'message' => session()->getFlashdata('message'),
+            'error' => session()->getFlashdata('error')
         ]);
     }
 
@@ -33,24 +35,24 @@ class Filme extends BaseController
         return view('form', ['filme' => $filme]);
     }
 
-    public function cadastrar(){
-    $postData = $this->request->getPost();
-    
-    // Buscar dados adicionais da OMDb
-    $apiData = $this->fetchMovieData($postData['filme']);
+    public function cadastrar()
+    {
+        $postData = $this->request->getPost();
 
-    if ($apiData) {
-        $postData = array_merge($postData, $apiData);
-    }
+        // Se você tiver integração com OMDb
+        if (method_exists($this, 'fetchMovieData')) {
+            $apiData = $this->fetchMovieData($postData['filme']);
+            if ($apiData) {
+                $postData = array_merge($postData, $apiData);
+            }
+        }
 
-    if ($this->filmeModel->save($postData)){
-        return view("messages", [
-            'message' => 'Produção salva com sucesso'
-        ]);
-    } else {
-        echo "Ocorreu um erro";
+        if ($this->filmeModel->save($postData)) {
+            return redirect()->to('/filmes')->with('message', 'Produção salva com sucesso!');
+        } else {
+            return redirect()->back()->withInput()->with('error', 'Erro ao salvar a produção.');
+        }
     }
-}
 
     public function editar($id)
     {
@@ -63,7 +65,7 @@ class Filme extends BaseController
     public function atualizar($id)
     {
         $data = $this->request->getPost();
-        if ($this->filmeModel->update($id, $data)) { // corrigido de atualizar() para update()
+        if ($this->filmeModel->update($id, $data)) {
             return redirect()->to('/filmes')->with('message', 'Produção atualizada com sucesso!');
         } else {
             return redirect()->back()->withInput()->with('error', 'Erro ao atualizar a produção.');

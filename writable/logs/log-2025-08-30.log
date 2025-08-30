@@ -558,3 +558,13 @@ in APPPATH\Controllers\Filme.php on line 40.
  5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
  7 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_filmes\\public\\index.php')
+CRITICAL - 2025-08-30 22:28:32 --> Error: Call to undefined method App\Controllers\Filme::fetchMovieData()
+[Method: POST, Route: filme/cadastrar]
+in APPPATH\Controllers\Filme.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Filme->cadastrar()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_filmes\\public\\index.php')
